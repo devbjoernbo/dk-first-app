@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 #  get kubernetes info
 # kubectl cluster-info
 

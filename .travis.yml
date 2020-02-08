@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+env:
+  global: GIT_REVISON=$(git rev-parse HEAD)
+before_install:
+  #  Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker build -t devbjoernbodk/react-test -f ./web-tests/Dockerfile.dev ./web-tests
+
+script:
+  - docker run devbjoernbodk/react-test
+
+after_success:
+  - ./updateBeta.sh

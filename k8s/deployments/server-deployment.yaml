@@ -21,11 +21,11 @@ spec:
             - name: REDIS_HOST # Redis config
               value: redis-cluster-ip-service
             - name: REDIS_PORT
-              value: 6379
+              value: "6379"
             - name: PG_HOST # Postgres config
               value: postgres-cluster-ip-service
             - name: PG_PORT
-              value: 5432
+              value: "5432"
             - name: PG_USER
               value: postgres
             - name: PG_PASSWORD
@@ -38,6 +38,6 @@ spec:
             - name: MONGO_HOST # Mongo config
               value: mongo-cluster-ip-service
             - name: MONGO_PORT
-              value: 27017
+              value: "27017"
             - name: MONGO_DATABASE
               value: first_app_kubernetes

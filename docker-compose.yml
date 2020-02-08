@@ -1,0 +1,67 @@
+version: "3"
+services:
+  postgres:
+    image: "postgres:latest"
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+  mongo:
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "4000:80"
+      - "8080:80"
+    depends_on:
+      - api-server
+      - web-client
+  web-client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./web-client
+    volumes:
+      - ./web-client:/app
+  api-server:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./api-server
+    volumes:
+      - ./api-server:/app
+    depends_on:
+      - mongo
+      - redis
+      - postgres
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PG_USER=postgres
+      - PG_HOST=postgres
+      - PG_DATABASE=postgres
+      - PG_PASSWORD=postgres_password
+      - PG_PORT=5432
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+      - MONGO_DATABASE=the_capitalist_v1
+  web-tests:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./web-tests
+    volumes:
+      - ./web-tests:/app
+  worker:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes:
+      - ./worker:/app
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis

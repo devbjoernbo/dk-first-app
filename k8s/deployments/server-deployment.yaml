@@ -17,3 +17,27 @@ spec:
           image: devbjoernbodk/kubernetes-api-server
           ports:
             - containerPort: 3000
+          env:
+            - name: REDIS_HOST # Redis config
+              value: redis-cluster-ip-service
+            - name: REDIS_PORT
+              value: 6379
+            - name: PG_HOST # Postgres config
+              value: postgres-cluster-ip-service
+            - name: PG_PORT
+              value: 5432
+            - name: PG_USER
+              value: postgres
+            - name: PG_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-password
+                  key: PG_PASSWORD
+            - name: PG_DATABASE
+              value: postgres
+            - name: MONGO_HOST # Mongo config
+              value: mongo-cluster-ip-service
+            - name: MONGO_PORT
+              value: 27017
+            - name: MONGO_DATABASE
+              value: first_app_kubernetes

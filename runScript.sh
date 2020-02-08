@@ -10,6 +10,9 @@
 # kubectl apply -f client-node-port.yaml
 # kubectl apply -f client-deployment.yaml
 
+# create type object for all files in folder
+# kubectl apply -f k8s
+
 #  delete object
 # kubectl delete -f client-pod
 
@@ -17,6 +20,7 @@
 #  kubectl get services -o wide
 #  kubectl get pods -o wide
 #  kubectl get deployments -o wide
+#  kubectl get secrets -o wide
 
 #  Get detailed info about an object
 # kubectl describe pod client-pod
@@ -24,14 +28,16 @@
 # kubectl describe pod client-deployment-84bb79cd55-88vkx
 
 # update object type property
-#  kubectl set image deployment/client-deployment client=devbjoernbodk/docker-kubernetes-web-client:v5
-
-# create type object for all files in folder
-# kubectl apply -f k8s
+# kubectl set image deployment/client-deployment client=devbjoernbodk/docker-kubernetes-web-client:v5
 
 # Commands
 # ./runScript.sh docker build
 # ./runScript.sh git commit name_of_commit
+
+# creating secret
+# kubectl create secret generic <secret_name> --from-literal key=value
+# ex. kubectl create secret generic postgres-password --from-literal PG_PASSWORD=postgres_password
+
 
 # Docker
 if [ "$1" = "docker" ]

@@ -15,5 +15,8 @@ spec:
       containers:
         - name: worker
           image: devbjoernbodk/kubernetes-worker
-          ports:
-            - containerPort: 3000
+          env:
+            - name: REDIS_HOST # Redis config
+              value: redis-cluster-ip-service
+            - name: REDIS_PORT
+              value: 6379

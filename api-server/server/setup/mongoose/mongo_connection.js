@@ -5,10 +5,13 @@ require("./schemas/mongooseSchemas");
 
 mongoose.Promise = global.Promise;
 mongoose
-  .connect(`mongodb://${keys.mongoPort}/${keys.mongoDatabase}`, {
-    useNewUrlParser: true,
-    useCreateIndex: true
-  })
+  .connect(
+    `mongodb://${keys.mongoHost}:${keys.mongoPort}/${keys.mongoDatabase}`,
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true
+    }
+  )
   .catch(error => console.log(error));
 
 mongoose.connection

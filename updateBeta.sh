@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Build Docker-images
+GIT_REVISON=$(git rev-parse HEAD)
 
-# Docker images
+# Build Docker-images
 API_SERVER="server"
 WEB_CLIENT="client"
 WORKER="worker"
@@ -12,7 +12,7 @@ IMAGES="$API_SERVER $WEB_CLIENT $WORKER"
 for IMAGE in $IMAGES
 do
   # Build image
-  docker build -t devbjoernbodk/dk-first-app-$IMAGE:latest devbjoernbodk/dk-first-app-$IMAGE:$GIT_REVISON ./$IMAGE/Dockerfile ./$IMAGE
+  docker build -t devbjoernbodk/dk-first-app-$IMAGE:$GIT_REVISON ./$IMAGE/Dockerfile ./$IMAGE
 
   if [ $? = 0 ]
   then

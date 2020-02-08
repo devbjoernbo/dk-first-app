@@ -12,4 +12,4 @@ script:
   - docker run devbjoernbodk/react-test
 
 after_success:
-  - ./updateBeta.sh
+  - updateBeta.sh
